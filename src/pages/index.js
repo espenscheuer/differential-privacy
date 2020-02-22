@@ -14,6 +14,8 @@ function IndexPage() {
 	const updateText = e => setText(e.target.value);
 
 	const apiRequest = async () => {
+		setOriginal(text);
+		setFound('');
 		const response = await fetch('/api/', {
 			method: 'POST',
 			headers: {
@@ -24,14 +26,26 @@ function IndexPage() {
 				text,
 			}),
 		});
-		response
-			.text()
-			.then(value => {
-				setFound(value);
-			})
-			.catch(error => {
-				console.error('Error!', error);
-			});
+		response.text().then(value => {
+			if (value !== 'No results found') {
+				setFound(
+					<>
+						<blockquote>{value}</blockquote>
+						<iframe
+							src={`https://google.com/search?igu=1&q=${escape(text)}`}
+							title="Search results"
+						/>
+					</>
+				);
+			} else {
+				setFound(
+					<iframe
+						src={`https://google.com/search?igu=1&q=${escape(text)}`}
+						title="Search results"
+					/>
+				);
+			}
+		});
 	};
 
 	useEffect(() => {
@@ -124,9 +138,9 @@ function IndexPage() {
 		<div>
 			<div className="input">
 				<textarea className="text-input" value={text} onChange={updateText} />
-				<button className="button" onClick={() => setOriginal(text)}>
+				{/* <button className="button" onClick={() => setOriginal(text)}>
 					Set Quote
-				</button>
+				</button> */}
 				<button className="button" onClick={apiRequest}>
 					Check Quote
 				</button>

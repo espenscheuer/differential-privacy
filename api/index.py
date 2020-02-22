@@ -13,7 +13,7 @@ def check(original, text):
 		here = original in g.text
 		if here:
 			return(g.text)
-	return ''
+	return 'No results found'
 
 class handler(BaseHTTPRequestHandler):
 	def do_GET(self):
