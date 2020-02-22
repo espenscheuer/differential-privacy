@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Helmet from 'react-helmet';
 
 function IndexPage() {
 	const [text, setText] = useState('');
@@ -140,6 +141,11 @@ function IndexPage() {
 
 	return (
 		<div className="content">
+			<Helmet>
+				<html lang="en" />
+				<title>Differential Privacy Checker</title>
+				<meta name="robots" content="noindex, nofollow" />
+			</Helmet>
 			<div className="input">
 				<textarea className="text-input" value={text} onChange={updateText} />
 				{/* <button className="button" onClick={() => setOriginal(text)}>
