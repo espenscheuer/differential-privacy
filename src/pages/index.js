@@ -11,7 +11,14 @@ function IndexPage() {
 	const onegram = require('../data/1_gram_json.json');
 	const twogram = require('../data/2_gram_json.json');
 
-	const updateText = e => setText(e.target.value);
+	const updateText = e => {
+		setText(e.target.value);
+		if ('' === e.target.value) {
+			setStyles({});
+			setOriginal('');
+			setFound('');
+		}
+	};
 
 	const apiRequest = async () => {
 		setOriginal(text);
@@ -52,9 +59,6 @@ function IndexPage() {
 		let generatedHTML = [];
 
 		const words = text.split(' ');
-		if (words.length === 0) {
-			setStyles({});
-		}
 
 		words.forEach((word, index) => {
 			const id = `word-${version}-${index}`;
