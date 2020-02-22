@@ -135,7 +135,7 @@ function IndexPage() {
 	// }, [textUpdates]);
 
 	return (
-		<div>
+		<div className="content">
 			<div className="input">
 				<textarea className="text-input" value={text} onChange={updateText} />
 				{/* <button className="button" onClick={() => setOriginal(text)}>
@@ -145,23 +145,23 @@ function IndexPage() {
 					Check Quote
 				</button>
 			</div>
-			{original && (
-				<>
-					<h2>Original Quote</h2>
-					<blockquote>{original}</blockquote>
-				</>
-			)}
 			{textContent.length > 0 && (
-				<>
+				<div>
 					<h2>Highlighted Quote</h2>
 					<blockquote>{textContent}</blockquote>
-				</>
+				</div>
+			)}
+			{original && (
+				<div>
+					<h2>Original Quote</h2>
+					<blockquote>{original}</blockquote>
+				</div>
 			)}
 			{found && (
-				<>
+				<div className="found">
 					<h2>Google Result</h2>
-					<blockquote>{found}</blockquote>
-				</>
+					{found}
+				</div>
 			)}
 		</div>
 	);
